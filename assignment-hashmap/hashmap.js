@@ -94,10 +94,31 @@ class HashMap {
     const index = this.hash(key) % this.buckets.length;
 
     const bucket = this.buckets[index];
+
     if (Array.isArray(bucket)) {
       return bucket.some((entry) => entry.key === key);
     } else {
       return bucket && bucket.key === key;
     }
+  }
+
+  remove(key) {
+    const index = this.hash(key) % this.buckets.length;
+
+    const bucket = this.buckets[index];
+
+    if (Array.isArray(bucket)) {
+      for (let i = 0; i < bucket.length; i++) {
+        if (bucket[i].key === key) {
+          bucket.splice(i, 1);
+          return true;
+        }
+      }
+    } else if (bucket && bucket.key === key) {
+      this.buckets[index] = null;
+      return true;
+    }
+
+    return false;
   }
 }
