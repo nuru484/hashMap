@@ -8,3 +8,6 @@ const stringToNumber = (string) => {
 
   return hashCode;
 };
+class HashMap {
+  constructor() {}
+}
