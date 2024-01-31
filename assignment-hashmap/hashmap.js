@@ -76,6 +76,7 @@ class HashMap {
     const index = this.hash(key) % this.buckets.length;
 
     const bucket = this.buckets[index];
+
     if (Array.isArray(bucket)) {
       for (const entry of bucket) {
         if (entry.key === key) {
@@ -87,5 +88,16 @@ class HashMap {
     }
 
     return null;
+  }
+
+  has(key) {
+    const index = this.hash(key) % this.buckets.length;
+
+    const bucket = this.buckets[index];
+    if (Array.isArray(bucket)) {
+      return bucket.some((entry) => entry.key === key);
+    } else {
+      return bucket && bucket.key === key;
+    }
   }
 }
