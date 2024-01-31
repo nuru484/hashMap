@@ -9,7 +9,11 @@ const stringToNumber = (string) => {
   return hashCode;
 };
 class HashMap {
-  constructor() {}
+  constructor() {
+    this.buckets = new Array(16);
+    this.loadFactor = 0.75;
+    this.capacity = 0;
+  }
 
   hash(key) {
     return stringToNumber(key);
