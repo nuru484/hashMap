@@ -71,4 +71,21 @@ class HashMap {
       }
     }
   }
+
+  get(key) {
+    const index = this.hash(key) % this.buckets.length;
+
+    const bucket = this.buckets[index];
+    if (Array.isArray(bucket)) {
+      for (const entry of bucket) {
+        if (entry.key === key) {
+          return entry.value;
+        }
+      }
+    } else if (bucket && bucket.key === key) {
+      return bucket.value;
+    }
+
+    return null;
+  }
 }
