@@ -121,4 +121,20 @@ class HashMap {
 
     return false;
   }
+
+  length() {
+    let totalSize = 0;
+
+    this.buckets.forEach((bucket) => {
+      if (Array.isArray(bucket)) {
+        bucket.forEach((entry) => {
+          totalSize += 1;
+        });
+      } else {
+        totalSize += 1;
+      }
+    });
+
+    return totalSize;
+  }
 }
