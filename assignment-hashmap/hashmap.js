@@ -141,4 +141,20 @@ class HashMap {
   clear() {
     this.buckets.fill(null);
   }
+
+  keys() {
+    let keys = [];
+
+    this.buckets.forEach((bucket) => {
+      if (Array.isArray(bucket)) {
+        bucket.forEach((entry) => {
+          keys.push(entry.key);
+        });
+      } else {
+        keys.push(bucket.key);
+      }
+    });
+
+    return keys;
+  }
 }
