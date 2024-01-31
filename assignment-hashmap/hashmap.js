@@ -10,4 +10,8 @@ const stringToNumber = (string) => {
 };
 class HashMap {
   constructor() {}
+
+  hash(key) {
+    return stringToNumber(key);
+  }
 }
