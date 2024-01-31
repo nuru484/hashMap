@@ -137,4 +137,8 @@ class HashMap {
 
     return totalSize;
   }
+
+  clear() {
+    this.buckets.fill(null);
+  }
 }
