@@ -157,4 +157,20 @@ class HashMap {
 
     return keys;
   }
+
+  values() {
+    let values = [];
+
+    this.buckets.forEach((bucket) => {
+      if (Array.isArray(bucket)) {
+        bucket.forEach((entry) => {
+          values.push(entry.value);
+        });
+      } else {
+        values.push(bucket.value);
+      }
+    });
+
+    return values;
+  }
 }
