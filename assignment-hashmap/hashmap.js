@@ -8,6 +8,7 @@ const stringToNumber = (string) => {
 
   return hashCode;
 };
+
 class HashMap {
   constructor(capacity = 16) {
     this.capacity = capacity;
@@ -22,9 +23,8 @@ class HashMap {
 
   resize(newCapacity) {
     const newBuckets = new Array(newCapacity).fill(null);
-    this.capacity = 0; // Reset capacity
+    this.capacity = newCapacity;
 
-    // Rehash existing elements into the new array
     this.buckets.forEach((bucket) => {
       if (bucket) {
         bucket.forEach(({ key, value }) => {
@@ -37,15 +37,14 @@ class HashMap {
         });
       }
     });
-    this.buckets = newBuckets; // Update buckets
+    this.buckets = newBuckets;
   }
 
   set(key, value) {
     const index = this.hash(key) % this.buckets.length;
 
-    // Check if resizing is needed
-    if (this.capacity > this.loadFactor * this.buckets.length) {
-      this.resize(this.buckets.length * 2); // Double the capacity
+    if (this.size >= this.loadFactor * this.buckets.length) {
+      this.resize(this.buckets.length * 2);
     }
 
     if (index < 0 || index >= this.buckets.length) {
@@ -146,12 +145,14 @@ class HashMap {
     let keys = [];
 
     this.buckets.forEach((bucket) => {
-      if (Array.isArray(bucket)) {
-        bucket.forEach((entry) => {
-          keys.push(entry.key);
-        });
-      } else {
-        keys.push(bucket.key);
+      if (bucket) {
+        if (Array.isArray(bucket)) {
+          bucket.forEach((entry) => {
+            keys.push(entry.key);
+          });
+        } else {
+          keys.push(bucket.key);
+        }
       }
     });
 
@@ -162,12 +163,14 @@ class HashMap {
     let values = [];
 
     this.buckets.forEach((bucket) => {
-      if (Array.isArray(bucket)) {
-        bucket.forEach((entry) => {
-          values.push(entry.value);
-        });
-      } else {
-        values.push(bucket.value);
+      if (bucket) {
+        if (Array.isArray(bucket)) {
+          bucket.forEach((entry) => {
+            values.push(entry.value);
+          });
+        } else {
+          values.push(bucket.value);
+        }
       }
     });
 
@@ -178,12 +181,14 @@ class HashMap {
     let entries = [];
 
     this.buckets.forEach((bucket) => {
-      if (Array.isArray(bucket)) {
-        bucket.forEach((entry) => {
-          entries.push([entry.key, entry.value]);
-        });
-      } else {
-        entries.push([bucket.key, bucket.value]);
+      if (bucket) {
+        if (Array.isArray(bucket)) {
+          bucket.forEach((entry) => {
+            entries.push([entry.key, entry.value]);
+          });
+        } else {
+          entries.push([bucket.key, bucket.value]);
+        }
       }
     });
 
