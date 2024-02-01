@@ -173,4 +173,20 @@ class HashMap {
 
     return values;
   }
+
+  entries() {
+    let entries = [];
+
+    this.buckets.forEach((bucket) => {
+      if (Array.isArray(bucket)) {
+        bucket.forEach((entry) => {
+          entries.push([entry.key, entry.value]);
+        });
+      } else {
+        entries.push([bucket.key, bucket.value]);
+      }
+    });
+
+    return entries;
+  }
 }
