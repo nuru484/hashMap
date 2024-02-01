@@ -190,3 +190,16 @@ class HashMap {
     return entries;
   }
 }
+
+const myHashMap = new HashMap();
+myHashMap.set('a', 1);
+myHashMap.set('b', 2);
+myHashMap.set('c', 3);
+
+console.log(myHashMap.get('a')); // Output: 1
+console.log(myHashMap.has('b')); // Output: true
+console.log(myHashMap.remove('c')); // Output: true
+console.log(myHashMap.length()); // Output: 2
+console.log(myHashMap.keys()); // Output: ['a', 'b']
+console.log(myHashMap.values()); // Output: [1, 2]
+console.log(myHashMap.entries()); // Output: [['a', 1], ['b', 2]]
